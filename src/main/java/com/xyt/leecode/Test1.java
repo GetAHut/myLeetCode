@@ -1,7 +1,10 @@
 package com.xyt.leecode;
 
+import java.awt.*;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.List;
 
 /**
  * @Author: abby
@@ -194,7 +197,8 @@ public class Test1 {
 
         int ans = 0;
         for (int v : count) {
-            ans = v / 2 * 2;
+            ans += v / 2 * 2;
+            //若存在大于1的奇数， 且 ans为偶数时 +1
             if (v % 2 == 1 && ans % 2 == 0){
                 ans++;
             }
@@ -203,13 +207,140 @@ public class Test1 {
 
     }
 
+    /**
+     * 写一个程序，输出从 1 到 n 数字的字符串表示。
+     * 1. 如果 n 是3的倍数，输出“Fizz”；
+     * 2. 如果 n 是5的倍数，输出“Buzz”；
+     * 3.如果 n 同时是3和5的倍数，输出 “FizzBuzz”。
+     * 示例：
+     * n = 15,
+     * 返回:
+     * [
+     *     "1",
+     *     "2",
+     *     "Fizz",
+     *     "4",
+     *     "Buzz",
+     *     "Fizz",
+     *     "7",
+     *     "8",
+     *     "Fizz",
+     *     "Buzz",
+     *     "11",
+     *     "Fizz",
+     *     "13",
+     *     "14",
+     *     "FizzBuzz"
+     * ]
+     */
+    public List<String> fizzBuzz(int n) {
+        //取 3 5 倍数用整除，放入list
+        //共同倍数
+        List<String> list = new ArrayList<>();
+        int count = 1;
+        for (int i = 1; i <= n; i++) {
+            if (count % 3 == 0 && count % 5 != 0){
+                list.add("Fizz");
+            } else if(count % 5 == 0 && count % 3 != 0) {
+                list.add("Buzz");
+            } else if (count % 3 == 0 && count % 5 == 0){
+                list.add("FizzBuzz");
+            } else {
+                list.add(Integer.toString(count ));
+            }
+            count++;
+        }
+        return list;
+    }
+
+    /**
+     *
+     给定一个非空数组，返回此数组中第三大的数。如果不存在，则返回数组中最大的数。要求算法时间复杂度必须是O(n)。
+
+     示例 1:
+
+     输入: [3, 2, 1]
+
+     输出: 1
+
+     解释: 第三大的数是 1.
+     示例 2:
+
+     输入: [1, 2]
+
+     输出: 2
+
+     解释: 第三大的数不存在, 所以返回最大的数 2 .
+     示例 3:
+
+     输入: [2, 2, 3, 1]
+
+     输出: 1
+
+     解释: 注意，要求返回第三大的数，是指第三大且唯一出现的数。
+     存在两个值为2的数，它们都排第二。
+     *
+     * @param args
+     */
+    public int thirdMax(int[] arrs ){
+         //要求时间复杂度为O(N)
+        //将数组放入set中，去除重复，若size小于3，则直接取数组中最大值，
+        //TreeSet中 有哦方法可以直接取出最大值，等。
+        //使用TreeSet更优
+        Set<Integer> set = new HashSet<>();
+        int ans = 0;
+        for (int i = 0; i < arrs.length; i++) {
+            set.add(arrs[i]);
+            if (ans < arrs[i]){
+                ans = arrs[i];
+            }
+        }
+        if (set.size() < 3){
+            return ans;
+        }
+        //当set中size大于3时， 取数组中第三大的值。
+        //set转list
+        List<Integer> list = new ArrayList<>(set);
+        Collections.sort(list);
+        Collections.reverse(list);
+        return list.get(2);
+    }
+
+    /**
+     * 习题 6
+     * 给定两个字符串形式的非负整数 num1 和num2 ，计算它们的和。
+     * 注意：
+     * num1 和num2 的长度都小于 5100.
+     * num1 和num2 都只包含数字 0-9.
+     * num1 和num2 都不包含任何前导零。
+     * 你不能使用任何內建 BigInteger 库， 也不能直接将输入的字符串转换为整数形式。
+     */
+    public String addStrings(String num1, String num2) {
+        StringBuilder res  = new StringBuilder("");
+        int i = num1.length() - 1, j = num2.length() - 1, carry = 0;
+        while (i >= 0 || j >= 0){
+            int n1 = i >= 0 ? num1.charAt(i) - '0' : 0;
+            int n2 = j >= 0 ? num2.charAt(j) - '0' : 0;
+            int tem =  n1 + n2 + carry;
+            carry = tem / 10;
+            res.append(tem % 10);
+            i--; j--;
+        }
+        if (carry == 1)
+            res.append(1);
+
+        return res.reverse().toString();
+    }
+
 
 
     public static void main(String[] args) {
         Test1 test1 = new Test1();
-        System.out.println(test1.isUnique02("abc"));
-        System.out.println(test1.toHex(78));
-        System.out.println(test1.longestPalindrome("abccccdd"));
+        int[] arrs = {1,1};
+//        System.out.println(test1.isUnique02("abc"));
+//        System.out.println(test1.toHex(78));
+//        System.out.println(test1.longestPalindrome01("abccccdd"));
+        System.out.println(test1.addStrings("9","99"));
     }
 
     /**
