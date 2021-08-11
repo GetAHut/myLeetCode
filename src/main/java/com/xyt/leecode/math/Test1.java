@@ -1,8 +1,5 @@
-package com.xyt.leecode;
+package com.xyt.leecode.math;
 
-import java.awt.*;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.xyt.leecode;
+package com.xyt.leecode.math;
 
 /**
  * @Author: xyt
