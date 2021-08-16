@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @Author: xyt
- * @Description: 单向链表
+ * @Description: 链表node节点
  * @Date: 2021/8/11 15:28
  */
 @Data
