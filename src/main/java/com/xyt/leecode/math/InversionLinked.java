@@ -1,6 +1,6 @@
 package com.xyt.leecode.math;
 
-import com.xyt.leecode.structure.ListNode;
+import com.xyt.leecode.structure.linkedLists.ListNode;
 
 /**
  * @Author: xyt

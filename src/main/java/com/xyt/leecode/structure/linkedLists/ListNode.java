@@ -1,4 +1,4 @@
-package com.xyt.leecode.structure;
+package com.xyt.leecode.structure.linkedLists;
 
 import lombok.Data;
 

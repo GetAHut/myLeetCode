@@ -62,10 +62,8 @@ public class LeetCode383 {
 
         return true;
     }
-
     public static void main(String[] args) {
-        //"fihjjjjei"
-        //"hjibagacbhadfaefdjaeaebgi"
+
         System.out.println(canConstruct("fihjjjjei", "hjibagacbhadfaefdjaeaebgi"));
     }
 }
