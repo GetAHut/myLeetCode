@@ -22,6 +22,8 @@ public class ArrayQueue<E> implements Queue<E> {
 
     @Override
     public boolean offer(E e) {     //入队
+        //移动元素 最好时间复杂度为O(1) 最坏时间复杂度为O(n)
+        this.narrowSpace();
         //如果满了返回false
         if (tail == n) return false;
         else {
@@ -35,6 +37,7 @@ public class ArrayQueue<E> implements Queue<E> {
     public boolean add(E e) {   //入队
         //移动元素 最好时间复杂度为O(1) 最坏时间复杂度为O(n)
         this.narrowSpace();
+        this.judgeQueue();
         elements[tail] = e;
         tail ++;
         return true;
@@ -46,7 +49,9 @@ public class ArrayQueue<E> implements Queue<E> {
         if (isEmpty()){
             throw new NullPointerException();
         }
-        return elements[head];
+        E element = elements[head];
+        head ++;
+        return element;
     }
 
     @Override
@@ -89,10 +94,35 @@ public class ArrayQueue<E> implements Queue<E> {
      * 因此 在队列满了之后，即  在 tail = n && head -tail != 0时 进行向左移动，以此重复利用。
      */
     public void narrowSpace(){
-        if (tail == n && head - tail != 0){
-            for (int i = 0; i < n - head; i++) {
+        if (tail == n && head != 0){
+            int curr = tail - head;
+            for (int i = 0; i < curr; i++) {
                 elements[i] = elements[head + i];
             }
+            tail = tail - head;
+            head = 0;
         }
+    }
+
+    /**
+     * 获取队列大小
+     * @return
+     */
+    @Override
+    public int size(){
+        return n;
+    }
+
+    public static void main(String[] args) {
+        Queue<Integer> queue = new ArrayQueue<>(3);
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+        System.out.println(queue.poll());
+        queue.add(4);
+        System.out.println(queue.peek());
+        queue.offer(5);
+        queue.size();
+        System.out.println(queue.peek());
     }
 }

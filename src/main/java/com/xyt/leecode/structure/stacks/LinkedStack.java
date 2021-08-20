@@ -12,6 +12,7 @@ public class LinkedStack<T> implements Stack<T> {
     private ListNode head;      //头节点
     private ListNode tail;      //尾节点
     private int n;              //元素大小
+    private int size;           //栈初始大小
 
     public LinkedStack(){
         this.head = new ListNode();
@@ -19,9 +20,17 @@ public class LinkedStack<T> implements Stack<T> {
         this.n = 0;
     }
 
+    public LinkedStack(int cap){
+        this.head = new ListNode();
+        this.tail = null;
+        this.n = 0;
+        this.size = cap;    //元素大小 超过则溢出
+    }
+
     @Override
-    public Stack<T> push(T t) {    //入栈 链表实现的栈 不需要考虑扩容问题
+    public Stack<T> push(T t) {    //入栈 （自动扩容）
         ListNode node = new ListNode(t);
+        this.isOverOf();
         if (isEmpty()) {
             head.next = node;
             tail = node;
@@ -36,7 +45,8 @@ public class LinkedStack<T> implements Stack<T> {
 
     @Override
     public T pop() {        //出栈
-        return null;
+
+        return isEmpty() ? null : (T)tail.val;
     }
 
     @Override
@@ -49,11 +59,23 @@ public class LinkedStack<T> implements Stack<T> {
         return n;
     }
 
+    /**
+     * 判断栈空间是否满了 初始化时有size的栈
+     * @return
+     */
+    private void isOverOf(){
+        if (size != 0 && n >= size){
+            throw new StackOverflowError();
+        }
+    }
+
     public static void main(String[] args) {
         Stack<String> stack = new LinkedStack<>();
         stack.push("123");
         stack.push("345");
         stack.push("111");
+        String pop = stack.pop();
+        System.out.println(pop);
     }
 }
 

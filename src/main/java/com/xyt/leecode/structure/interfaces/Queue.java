@@ -44,4 +44,10 @@ public interface Queue<E> {
      * @return
      */
     E element();
+
+    /**
+     * 队列大小
+     * @return
+     */
+    int size();
 }
