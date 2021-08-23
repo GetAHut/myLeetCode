@@ -1,5 +1,7 @@
 package com.xyt.leecode.sort;
 
+import java.util.Arrays;
+
 /**
  * @Author: xyt
  * @Description: 希尔排序
@@ -24,28 +26,29 @@ public class ShellSort {
         if (nums.length == 0)
             throw new NullPointerException();
 
-        int i = nums.length;    //i 用来表示增量
+        int i = nums.length / 2;    //i 用来表示增量
 
-        while (i > 0){
+        while (i >= 1){
             //根据i的增量 来跳跃循环（通过插入排序方式）
-            for (int j = 1; j < nums.length; j = j + i) {
+            for (int j = i; j < nums.length; j ++) {
                 int data = nums[j];
-                int k = j - 1;
-                for ( ; k >= 0 ; k--) {
+                int k = j - i;
+                //根据增量处理
+                for ( ; k >= 0 ; k -= i) {
                     if (nums[k] > data)
-                        nums[k + 1] = nums[k];
+                        nums[k + i] = nums[k];
                     else
                         break;  //通过希尔排序 会有更多的走break，改进的时间复杂度。
                 }
-                nums[k + 1] = data;
+                nums[k + i] = data;
             }
-            i = i / 2;  //取整数，到i = 1终止算法。
+            i /= 2;  //取整数，到i = 1终止算法。
         }
     }
 
     public static void main(String[] args) {
         int[] arr = {7, 5, 3, 6, 1, 9, 8};
         sort(arr);
-        System.out.println(arr);
+        System.out.println(Arrays.toString(arr));
     }
 }
