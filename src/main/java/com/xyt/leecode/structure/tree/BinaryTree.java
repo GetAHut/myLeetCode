@@ -1,5 +1,9 @@
 package com.xyt.leecode.structure.tree;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * @Author: xyt
  * @Description:  二叉树 （链表结构）
@@ -52,6 +56,26 @@ public class BinaryTree {
     }
 
     /**
+     * 层序遍历   可以使用 数组、队列实现
+     * @param root
+     * @return
+     */
+    public static void traversal(TreeNode root){
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()){
+            TreeNode poll = queue.poll();
+            print(poll);
+            if (poll.getLeft() != null){
+                queue.offer(poll.getLeft());
+            }
+            if (poll.getRight() != null){
+                queue.offer(poll.getRight());
+            }
+        }
+    }
+
+    /**
      * 输出
      * @param node
      */
@@ -76,5 +100,7 @@ public class BinaryTree {
         BinaryTree.in(A);
         System.out.println();
         BinaryTree.post(A);
+        System.out.println();
+        BinaryTree.traversal(A);
     }
 }
