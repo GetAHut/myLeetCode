@@ -1,6 +1,5 @@
 package com.xyt.leecode.structure.tree;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -19,11 +18,11 @@ public class BinaryTree {
      */
     public static void pre(TreeNode root){
         print(root);
-        if (root.getLeft() != null){    //左节点不为空， 以左节点作为根节点递归
-            pre(root.getLeft());
+        if (root.left != null){    //左节点不为空， 以左节点作为根节点递归
+            pre(root.left);
         }
-        if (root.getRight() != null){   //右节点不为空， 以右节点作为根节点递归
-            pre(root.getRight());
+        if (root.right != null){   //右节点不为空， 以右节点作为根节点递归
+            pre(root.right);
         }
     }
 
@@ -32,12 +31,12 @@ public class BinaryTree {
      * @param root
      */
     public static void in(TreeNode root){
-        if (root.getLeft() != null){    //左节点不为空， 以左节点作为根节点递归
-            in(root.getLeft());
+        if (root.left != null){    //左节点不为空， 以左节点作为根节点递归
+            in(root.left);
         }
         print(root);
-        if (root.getRight() != null){   //右节点不为空， 以右节点作为根节点递归
-            in(root.getRight());
+        if (root.right != null){   //右节点不为空， 以右节点作为根节点递归
+            in(root.right);
         }
     }
 
@@ -46,11 +45,11 @@ public class BinaryTree {
      * @param root
      */
     public static void post(TreeNode root){
-        if (root.getLeft() != null){    //左节点不为空， 以左节点作为根节点递归
-            post(root.getLeft());
+        if (root.left != null){    //左节点不为空， 以左节点作为根节点递归
+            post(root.left);
         }
-        if (root.getRight() != null){   //右节点不为空， 以右节点作为根节点递归
-            post(root.getRight());
+        if (root.right != null){   //右节点不为空， 以右节点作为根节点递归
+            post(root.right);
         }
         print(root);
     }
@@ -66,11 +65,11 @@ public class BinaryTree {
         while (!queue.isEmpty()){
             TreeNode poll = queue.poll();
             print(poll);
-            if (poll.getLeft() != null){
-                queue.offer(poll.getLeft());
+            if (poll.left != null){
+                queue.offer(poll.left);
             }
-            if (poll.getRight() != null){
-                queue.offer(poll.getRight());
+            if (poll.right != null){
+                queue.offer(poll.right);
             }
         }
     }
@@ -80,7 +79,7 @@ public class BinaryTree {
      * @param node
      */
     public static void print(TreeNode node){
-        System.out.print(node.getVal());
+        System.out.print(node.val);
     }
 
 

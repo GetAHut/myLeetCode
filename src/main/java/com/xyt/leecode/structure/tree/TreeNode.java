@@ -12,8 +12,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class TreeNode<T> {
 
-    private T val;              //value
-    private TreeNode<T> left;   //左节点
-    private TreeNode<T> right;  //右节点
+    public T val;              //value
+    public TreeNode<T> left;   //左节点
+    public TreeNode<T> right;  //右节点
 
 }
