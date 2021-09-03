@@ -43,6 +43,7 @@ public class HuffmanTree {
         int len = queue.size();
         //每次找最小的两个点合并， 所以循环次数为len - 1次， 最后一个点不需要循环
         for (int i = 1; i <= len - 1; i++) {
+            //贪心算法
             HfmNode left = queue.poll();    //第一次从队列拿节点 为左节点
             HfmNode right = queue.poll();   //第二次拿 要比第一次大，作为右节点
 
@@ -58,7 +59,8 @@ public class HuffmanTree {
             //重新放入优先队列
             queue.add(newNode);
         }
-        return queue.poll();        //队列最后的节点为跟节点
+        root = queue.poll();
+        return root;        //队列最后的节点为跟节点
     }
 
     /**
@@ -96,7 +98,21 @@ public class HuffmanTree {
      */
     public String deCode(String password){
 
-        return null;
+        String res = "";
+        HfmNode cur = root;
+        for (char c : password.toCharArray()) {
+            if (c == '0')
+                cur = cur.left;
+            else
+                cur = cur.right;
+
+            if (cur.left == null && cur.right == null){
+                res = res + cur.chars;
+                cur = root;
+            }
+        }
+
+        return res;
     }
 
     /**
@@ -126,6 +142,7 @@ public class HuffmanTree {
         tree.createTree();
         Map<Character, String> code = tree.code();
         System.out.println(tree.enCode("abc"));
+        System.out.println(tree.deCode("10110011010"));
     }
 }
 

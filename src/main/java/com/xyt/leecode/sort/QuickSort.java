@@ -45,7 +45,7 @@ public class QuickSort {
                 front ++;   //交换结束 前指针移动
             }
             //第二步 从前往后遍历。 找到比基准数大的 交换
-            while (front < back && _base >= nums[left]){
+            while (front < back && _base >= nums[front]){
                 front ++;   //未找到则前指针向后移动
             }
             if (front < back){ //通过while条件判断  此条件成立则一定找到了
@@ -75,8 +75,9 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = {7, 5, 3, 6, 1, 9, 8};
-        sort(arr, 0, 6);
+//        int[] arr = {7, 5, 3, 6, 1, 9, 8};
+        int[] arr = {1, 3, 5, 7, 2, 4, 6, 8};
+        sort(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
 }
