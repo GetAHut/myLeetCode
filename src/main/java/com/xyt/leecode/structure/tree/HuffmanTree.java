@@ -22,7 +22,7 @@ public class HuffmanTree {
     }
 
     /**
-     * 构建哈夫曼树
+     * 构建哈夫曼树 优先队列
      * @return
      */
     public HfmNode createTree(){

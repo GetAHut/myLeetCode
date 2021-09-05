@@ -119,7 +119,7 @@ public class BinarySearchTree<T> {
         if (root == null) return null;
         root = root.right;
         while (root.left != null){
-            root = root.right;
+            root = root.left;
         }
         return root;
     }
