@@ -1,5 +1,7 @@
 package com.xyt.leecode.structure.diagram;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -7,11 +9,15 @@ import java.util.Scanner;
  * @Description: 迪杰斯特拉算法 求最短路劲
  * @Date: 2021/9/7 15:37
  */
-public class Dijkstra {
+public class Dijkstra implements Cloneable {
 
     /**
      * 用到贪心算法、动态规划思想。
+     * 笔记 @link https://app.yinxiang.com/fx/13d7a2dc-31fd-40ee-a3f3-b626df681d1b
      */
+
+    //最短路径
+    static Map<String, String> path = new HashMap<>();
 
     /**
      *
@@ -40,20 +46,32 @@ public class Dijkstra {
             }
             if (loc == 0) break; //表示没有可以在加的点了
             mark[loc] = true; //    将加入的点位置标记为已处理
+
+            //判断点是否已经加入map
+            if (!path.containsKey(loc + "")){
+                path.put(loc + "", x + "->" + loc);
+            }
+
             //松弛处理 （动态规划的状态转移方程）
             //dis[3] + weights[3][i] < dis[i]
             for (int i = 1; i <= n; i++) {
                 //状态方程程序化，weights[loc][i] != -1  其中-1表示两点之间没有路
                 if (weights[loc][i] != -1 &&
                         (dis[loc] + weights[loc][i] < dis[i])){
-                    //赋值
+                    //赋值 求最短距离
                     dis[i] = dis[loc] + weights[loc][i];
+                    //求最短路径
+                    path.put(i + "", path.get(loc + "") + "->" + i);
                 }
             }
             count++;
         }
         for (int i = 1; i <= n; i++) {
-            System.out.println(x + "到" + i + "的距离为：" +dis[i]);
+            System.out.println(x + "到" + i + "的距离为：" + dis[i]);
+            if (path.get(i + "") == null){
+                path.put(i + "", x + "无法到达" + i);
+            }
+            System.out.println(x + "到" + i + "的最短路径为" + path.get(i + ""));
         }
     }
 }
