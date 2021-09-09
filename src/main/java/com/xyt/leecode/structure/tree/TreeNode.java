@@ -16,4 +16,8 @@ public class TreeNode<T> {
     public TreeNode<T> left;   //左节点
     public TreeNode<T> right;  //右节点
 
+    public TreeNode(T val){
+        this.val = val;
+    }
+
 }
