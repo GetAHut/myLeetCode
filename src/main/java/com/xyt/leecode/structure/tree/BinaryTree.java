@@ -75,6 +75,43 @@ public class BinaryTree {
     }
 
     /**
+     *  二叉树深度 时间复杂度O(n) 空间复杂度 O(n)
+     *      思路： 自底向上的递归， 求左右子树的最后的节点，然后向上递归
+     *      关键点： 树的深度是和其左右子树相关，即树的深度 = 左子树深度 、右子树深度 的最大值 + 1
+     *      递归终止条件  root == null 即root为空，则所以子树都已经遍历过了
+     * @link leetCode https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/
+     * @param root
+     * @return
+     */
+    public static int maxDepth(TreeNode root) { //
+        if (root == null) return 0;
+        //找叶子节点, 从叶子节点向上遍历， 返回左右子树最大 + 1就是深度
+        return Math.max(maxDepth(root.right), maxDepth(root.left)) + 1;
+
+    }
+
+    /**
+     * 二叉树镜像
+     *  思路： 递归交换左右孩子节点
+     * @link leetCode 剑指 Offer 27. 二叉树的镜像
+     * @link https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/
+     * @param root
+     * @return
+     */
+    public TreeNode mirrorTree(TreeNode root) {
+
+        if (root == null) return null;
+
+        //从根节点开始 反转子节点 （交换两颗子树）
+        TreeNode leftNode = mirrorTree(root.left);
+        TreeNode rightNode = mirrorTree(root.right);
+
+        root.left = rightNode;
+        root.right = leftNode;
+        return root;
+    }
+
+    /**
      * 输出
      * @param node
      */

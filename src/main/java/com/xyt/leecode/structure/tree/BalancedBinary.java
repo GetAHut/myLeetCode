@@ -39,6 +39,11 @@ public class BalancedBinary {
      */
 
 
+    /**
+     * 判断是否是平衡二叉树
+     * @param root
+     * @return
+     */
     public static boolean isBalanced(TreeNode<Integer> root) {
 
         return heights(root) >= 0;
