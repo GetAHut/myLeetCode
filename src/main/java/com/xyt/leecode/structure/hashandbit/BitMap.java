@@ -19,6 +19,10 @@ public class BitMap {
 
     //将n存入bit 用1标识位
     public void add(int n){
+        if (n > max){
+            //最大的数不能加入
+            return;
+        }
         int byteIndex = n >> 3;     //找到byte数组中哪一个
         // % 可以使用&运算
         // a % b = a & (b - 1) 前提是b是 2的n次方
@@ -49,6 +53,9 @@ public class BitMap {
             bits[byteIndex] |= (1 << loc);
             //在 & 1 = 0
             bits[byteIndex] ^= (1 << loc);
+
+//            // ~ 取反
+//            bits[byteIndex] = (byte) (bits[byteIndex] & ~(1 << loc));
         }
     }
 }

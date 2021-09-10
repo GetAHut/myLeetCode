@@ -69,7 +69,7 @@ public class HeapSort {
     public static void heapSort(int[] nums, boolean isOrder){
 
         int len = nums.length;
-        //从最后一个有叶子节点的结点开始遍历  也就是位置： len / 2 - 1
+        //从最后一个有叶子节点的结点开始遍历  也就是位置： len / 2 - 1 （完全二叉树）
         for (int i = len / 2 - 1; i >= 0 ; i--) { //时间复杂度  O(nlog n)
             if (isOrder){
                 maxHeap(nums, i, len);
