@@ -144,6 +144,47 @@ public class ArraysSolution {
         return ans;
     }
 
+    /**
+     * leetCode 4 寻找两个正序数组的中位数
+     *      给定两个大小分别为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。
+     *      请你找出并返回这两个正序数组的 中位数 。
+     *
+     *  思路：合并数组， 奇数 返回 len / 2  + 1;偶数 (len / 2 + len / 2 + 1) / 2
+     *      合并数组，因为两个是正序数组。
+     *
+     * @link https://leetcode-cn.com/problems/median-of-two-sorted-arrays/
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        //合并数组， 可否使用贪心算法来解
+        // 假设第二个数组的值都大于第一个数组的值。那么直接插入第一个数组的最后就行。
+        // 且中位数就是 两个数组长度相加的中位数
+        // 如果排在前面的数组，其中有n个数大于 中位数， 则中位数向后移n个位置、
+        double ans = 0.0;
+        int n = nums1.length, m = nums2.length;
+        int len = n + m;
+        int[] temp = new int[len];
+        int index = 0, front = 0, back = 0;
+        while (index < n){
+            temp[index ++] = nums1[front ++];
+        }
+        while (back < m){
+            temp[index ++] = nums2[back ++];
+        }
+        Arrays.sort(temp);
+
+        int k = (len / 2);
+        if (len % 2 == 0){
+            ans = (double) (temp[k - 1] + temp[k]) / 2;
+        } else {
+            ans = temp[k];
+        }
+
+        return ans;
+    }
+
 
     /**
      * 数组交换
@@ -174,5 +215,9 @@ class SolutionTest{
 
         int[] nums = {};
         ArraysSolution.constructArr(nums);
+
+        int[] nums1 = {1, 2};
+        int[] nums2 = {3, 4};
+        ArraysSolution.findMedianSortedArrays(nums1, nums2);
     }
 }
