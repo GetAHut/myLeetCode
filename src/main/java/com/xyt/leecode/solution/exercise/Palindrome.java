@@ -14,19 +14,55 @@ public class Palindrome {
      *          输出："bab"
      *          解释："aba" 同样是符合题意的答案。
      *
-     *  思路：
+     *  思路：使用动态规划
+     *      状态转移方程： dp[i][j] = dp[i + 1][j - 1];
+     *          其中dp[i][j] 表示s[i] == s[j]
+     *
+     *   关键点： 求出状态转移方程
+     *          根据左边界以及子串长度 求出右边界。
      *
      * @link https://leetcode-cn.com/problems/longest-palindromic-substring/
      * @param s
      * @return
      */
     public static String longestPalindrome(String s) {
-        int front = 0, len = s.length();
-        int back = len;
+        int len = s.length();
+        if (len < 2) return s;
 
+        int maxLen = 1, begin = 0;  //定义最大子串长度，以及起始位置。
+        //标记表示dp[i][j] ，表示s[i ... j]是否是回文串
+        boolean dp[][] = new boolean[len][len];
+        for (int i = 0; i < len; i++) {
+            dp[i][i] = true;    //初始化
+        }
 
+        char[] chars = s.toCharArray();
+        //枚举子串长度
+        for (int L = 2; L <= len; L++) {
+            //枚举左边界位置
+            for (int i = 0; i < len; i++) {
+                //可以根据L i 确定有边界位置。j - i + 1 = L：
+                int j = L + i - 1;  //右边界
+                if (j >= len) break; //右边界越界直接跳出当前循环
 
-        return null;
+                if (chars[i] != chars[j]){
+                    dp[i][j] = false;
+                } else {
+                    if (j - i < 3){ //j - i < 3表示子串长度不超过3,两端相等则就是回文串
+                        dp[i][j] = true;
+                    } else {
+                        //状态转移方程
+                        dp[i][j] = dp[i + 1][j - 1];
+                    }
+                }
+                //只要是dp[i][j]= true 则表示s[i...j]是回文子串。
+                if (dp[i][j] && j - i + 1 > maxLen){
+                    maxLen = j - i + 1; //最大长度更新
+                    begin = i;  //起始位置
+                }
+            }
+        }
+        return s.substring(begin, begin + maxLen);
     }
 
     /**
