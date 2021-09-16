@@ -5,7 +5,7 @@ import lombok.Data;
 
 /**
  * @Author: xyt
- * @Description:
+ * @Description: 二叉树 node
  * @Date: 2021/8/26 15:16
  */
 @Data
