@@ -44,7 +44,7 @@ public class InsertionSort {
         }
     }
 
-    public static void sort_print(int[] nums){
+    public static void sortPrint(int[] nums){
         if (nums.length == 0){
             throw new NullPointerException();
         }

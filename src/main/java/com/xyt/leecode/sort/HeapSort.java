@@ -13,15 +13,15 @@ public class HeapSort {
      * 堆化 大顶堆的构建
      * @param nums  数据
      * @param start 开始位置
-     * @param end   堆化结束位置
+     * @param end   堆化结束位置 已经排序好的必须要再去堆化。所以会有end位置
      */
     private static void maxHeap(int[] nums, int start, int end){
 
         int parent = start; //从最后一个父节点开始遍历
         int son = parent * 2 + 1;   //下标从0开始（左孩子） 完全二叉树性质， 节点位置为 2 * i + 1
 
-        while (son < end){
-            int data = son;     //孩子节点， son + 1 为 右孩子节点
+        while (son < end){  //当子节点 超出了end （已经排过序的节点）则不需要在堆化
+            int data = son;     //孩子节点， son + 1 为 右孩子节点 data即表示左右孩子节点最大的节点
             if (son + 1 < end && nums[son] < nums[son + 1]){
                 //右孩子 也不能超过end， 如果右孩子比左孩子要大
                 //则交换右孩子
@@ -70,6 +70,7 @@ public class HeapSort {
 
         int len = nums.length;
         //从最后一个有叶子节点的结点开始遍历  也就是位置： len / 2 - 1 （完全二叉树）
+        //将每一个子树堆化。
         for (int i = len / 2 - 1; i >= 0 ; i--) { //时间复杂度  O(nlog n)
             if (isOrder){
                 maxHeap(nums, i, len);
@@ -77,7 +78,11 @@ public class HeapSort {
                 minHeap(nums, i, len);
             }
         }
-        //将第一个与最后一个替换, 已经交换过的不需要再次交换 i = len - 1
+        //将第一个与最后一个替换, 已经交换过的不需要再次交换 i = len - 1；
+        // 从堆顶开始堆化。 最后层次遍历获得排序后的数组。
+        //此处也可以套用删除的逻辑；
+        //删除 应将堆顶与最后一个节点交换。 然后从堆顶堆化
+        //
         for (int i = len - 1; i > 0 ; i--) { //时间复杂度  O(nlog n)1
             swap(nums, 0, i);
             if (isOrder){
