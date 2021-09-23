@@ -86,7 +86,7 @@ public class HeapSort {
         for (int i = len - 1; i > 0 ; i--) { //时间复杂度  O(nlog n)1
             swap(nums, 0, i);
             if (isOrder){
-                maxHeap(nums, 0, i);
+                maxHeap(nums, 0, i);    //i 因为len ~ i 已经排好序了。
             } else {
                 minHeap(nums, 0, i);
             }
