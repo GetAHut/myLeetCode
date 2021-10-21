@@ -41,6 +41,7 @@ public class BalancedBinary {
 
     /**
      * 判断是否是平衡二叉树
+     *  返回平衡树的高度
      * @param root
      * @return
      */
@@ -60,9 +61,11 @@ public class BalancedBinary {
 
         int leftHeight = heights(root.left);
         int rightHeight = heights(root.right);
-        if (leftHeight == -1 || rightHeight == -1 ||Math.abs(leftHeight - rightHeight) > 1){
+        if (leftHeight == -1 || rightHeight == -1
+                ||Math.abs(leftHeight - rightHeight) > 1){
             return -1;
         } else {
+            //树的高度
             return Math.max(heights(root.left), heights(root.right)) + 1;
         }
     }
