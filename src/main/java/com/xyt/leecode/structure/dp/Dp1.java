@@ -71,6 +71,7 @@ public class Dp1 {
         if (nums == null || len == 0 ) return 0;
         if (len == 1) return nums[0];
 
+        // 此处以为 都是计算两个值， 因此可以优化为两个变量来代替数组 将空间复杂度降到O(1)
         int[] dp = new int[len];
         dp[0] = nums[0]; dp[1] = Math.max(nums[0], nums[1]);
 
@@ -83,12 +84,57 @@ public class Dp1 {
         return dp[len - 1];
     }
 
+    public static int maxMoneyDp2(int[] nums){
+        // 出口
+        int len = nums.length;
+        if (nums == null || len == 0) return 0;
+        if (len == 1) return nums[0];
+
+        // 定义两个变量 存放两种可能的值
+        int front = nums[0], back = Math.max(front, nums[1]);
+
+        for (int i = 2; i < len; i++) {
+            int temp = back;
+            back = Math.max(front + nums[i], back);
+            front = temp;
+        }
+        return back;
+    }
+
+    /**
+     * 如果房子首尾相连  那么需要处理两次， 一次为 0 - ( len - 2 ) 一次为 (1 - (length - 1))
+     * @param nums
+     * @return
+     */
+    public static int maxMoneyDp3(int[] nums){
+        int len = nums.length;
+        if (len == 1){
+            return nums[0];
+        } else if (len == 2){
+            return Math.max(nums[0], nums[1]);
+        }
+
+        return Math.max(range(nums, 0, len - 2), range(nums, 1, len - 1));
+    }
+
+    private static int range(int[] nums, int start, int end){
+        int first = nums[start];
+        int second = Math.max(nums[start], nums[start + 1]);
+
+        for (int i = start + 2; i <= end; i++) {
+            int temp = second;
+            second = Math.max(first + nums[i], second);
+            first = temp;
+        }
+        return second;
+    }
+
 }
 
 class Dp1Test{
     public static void main(String[] args) {
         int[] nums = new int[]{2, 7, 9, 3, 1};
         System.out.println(Dp1.maxMoney(nums.length - 1, nums));
-        System.out.println(Dp1.maxMoneyDp1(nums));
+        System.out.println(Dp1.maxMoneyDp3(nums));
     }
 }
