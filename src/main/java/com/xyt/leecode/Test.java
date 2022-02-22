@@ -25,6 +25,7 @@ public class Test {
 
         int[] nums = {2, 7, 1, 5, 4, 3};
         heapSort(nums);
+        int i = binarySearch(nums, 2);
         quickSort(nums, 0, nums.length - 1);
         chooseSort(nums);
         buddingSort(nums);
@@ -194,7 +195,7 @@ public class Test {
      * @param s
      * @param e
      */
-    public static void maxHeap(int[] nums, int s, int e){
+    private static void maxHeap(int[] nums, int s, int e){
         int parent = s;
         // 下标从0开始 ，根据二叉树性质，子节点位置为 parent * 2 + 1
         int son = (parent << 1) + 1;
@@ -228,6 +229,27 @@ public class Test {
             swap(nums, 0, i);
             maxHeap(nums, 0, i);
         }
+    }
+
+
+    /**
+     * 二分查找
+     * @param nums
+     * @param target
+     */
+    public static int binarySearch(int[] nums, int target){
+        int l = 0, h = nums.length - 1;
+        while (l <= h){
+            int mid = (h - l) / 2 + l ;
+            if (nums[mid] < target){
+                l = mid + 1;
+            } else if (nums[mid] > target){
+                h = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return -1;
     }
 
 }

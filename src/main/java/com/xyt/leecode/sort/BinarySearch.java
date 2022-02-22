@@ -14,7 +14,6 @@ public class BinarySearch {
      * @return
      */
     public static int search(int[] nums, int target){
-        int ans = -1;
         int low = 0, high = nums.length - 1;
         while (low <= high){
             int mid = (high - low) / 2 + low;
@@ -23,9 +22,9 @@ public class BinarySearch {
             } else if (nums[mid] < target){
                 low = mid + 1;      //右边查找
             } else {
-                ans = mid;
+                return mid;
             }
         }
-        return ans;
+        return -1;
     }
 }
